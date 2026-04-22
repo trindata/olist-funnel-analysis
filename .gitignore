@@ -1,15 +1,8 @@
-# Ignorar checkpoints de Jupyter
 .ipynb_checkpoints/
-
-# Ignorar arquivos temporários
 *.log
 *.tmp
-
-# Ignorar arquivos do sistema
 .DS_Store
 Thumbs.db
-
-# Ambiente virtual
 .venv/
 .venv
 .python-version
@@ -18,4 +11,5 @@ __pycache__/
 *.pyc
 .env
 .zip
-.txt
+secrets/
+raw_files/
