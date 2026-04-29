@@ -1,0 +1,16 @@
+olist-funnel-analysis/
+├── bigquery_management/
+│   ├── funcoes_gestao_bigquery.py
+│   └── modelo_bigquery.py
+├── config/
+│   ├── config_bigquery.py
+│   ├── config_paths.py
+│   └── config_tables.py
+├── kaggle/
+│   └── get_all_datasets_from_kaggle.py
+├── d.ipynb
+├── gera_arvore.py
+├── README-API.md
+├── README.md
+├── requirements.txt
+└── Windows PowerShell.txt

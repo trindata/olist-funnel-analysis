@@ -13,3 +13,4 @@ __pycache__/
 .zip
 secrets/
 raw_files/
+gera_arvore.*

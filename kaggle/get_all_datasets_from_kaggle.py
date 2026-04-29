@@ -3,8 +3,8 @@ import pandas as pd
 import shutil
 from pathlib import Path
 
-from config_paths import PATH_RAW_FILES
-from config_tables import TABLES
+from config.config_paths import PATH_RAW_FILES
+from config.config_raw_tables_kaggle import TABLES
 
 # Baixa para o cache e copia para o projeto
 cache = Path(kagglehub.dataset_download("olistbr/brazilian-ecommerce"))
