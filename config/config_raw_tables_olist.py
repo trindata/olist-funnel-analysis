@@ -7,5 +7,5 @@ TABLES = {
     "products":             ("olist_products_dataset.csv",             "latin-1"),
     "sellers":              ("olist_sellers_dataset.csv",              "utf-8"),
     "geolocation":          ("olist_geolocation_dataset.csv",          "utf-8"),
-    "category_translation": ("product_category_name_translation.csv", "latin-1"),
+    "category_translation": ("product_category_name_translation.csv",  "utf-8-sig"),
 }

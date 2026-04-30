@@ -30,38 +30,46 @@ def validar_df_para_bigquery(df: pd.DataFrame) -> None:
         )
 
 
-def criar_client_bigquery(destino: BigQueryConfig) -> bigquery.Client:
+def criar_client_bigquery(table: BigQueryConfig) -> bigquery.Client:
     credentials = service_account.Credentials.from_service_account_file(
-        str(destino.credentials_json_path)
+        str(table.credentials_json_path)
     )
 
     return bigquery.Client(
-        project=destino.project_id,
+        project=table.project_id,
         credentials=credentials,
-        location=destino.location,
+        location=table.location,
     )
 
 
 def submeter_bigquery(
     df: pd.DataFrame,
-    destino: BigQueryConfig,
+    table: BigQueryConfig,
 ) -> str:
-    validar_df_para_bigquery(df)
-
-    client = criar_client_bigquery(destino)
-
-    job_config = bigquery.LoadJobConfig(
-        write_disposition=destino.write_disposition
-    )
-
-    job = client.load_table_from_dataframe(
-        df,
-        destino.full_table_id,
-        job_config=job_config,
-    )
-    job.result()
     
-    return f"Dados submetidos com sucesso para: {destino.full_table_id}"
+    try: 
+        validar_df_para_bigquery(df)
+
+        client = criar_client_bigquery(table)
+
+        job_config = bigquery.LoadJobConfig(
+            write_disposition=table.write_disposition
+        )
+
+        job = client.load_table_from_dataframe(
+            df,
+            table.full_table_id,
+            job_config=job_config,
+        )
+        job.result()
+        
+        print(f"Dados submetidos com sucesso para: {table.full_table_id}")
+    
+        return True
+    
+    except Exception as e:
+        print(f"Erro ao submeter dados para {table.full_table_id}: {e}")
+        return False
 
 
 # =============================================================================
@@ -71,9 +79,9 @@ def submeter_bigquery(
 def consultar_bigquery(
     query: str,
     *,
-    destino: BigQueryConfig,
+    table: BigQueryConfig,
 ) -> pd.DataFrame:
-    client = criar_client_bigquery(destino)
+    client = criar_client_bigquery(table)
 
     job = client.query(query)
     resultado = job.result()
